@@ -131,12 +131,6 @@
         font-size: 14px;
       }
       
-      #flt16_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-
       p1 {
         font-size: 10px !important;
       }
@@ -181,13 +175,11 @@
    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <table class="mytable" id="mla">
      <tr>
-        <th>Status</th>
         <th>Craft</th>
         <th>Area</th>
         <th>Signatory</th>
         <th>Discharge</th>
         <th>Show Up Time</th>
-        <th>SAP</th>
         <th>Employer Elected Drug Testing Program</th>
         <th>Prior Notice of Testing</th>
         <th>Pre-Employment Testing</th>
@@ -198,15 +190,14 @@
         <th>Probable/Resonable Cause</th>
         <th>Random/Periodic</th>
         <th>D.O.T.</th>
-      </tr>
-      <!-- ===========================================================================================-->
-       <tr> <!--Status--><td style="text-align: center;"><p>Current</p></td>
+        </tr>
+        <!-- ===========================================================================================-->
+        <tr> <!--Status-->
         <!--Craft--><td style="text-align: center;"><p>Operators</p></td>
         <!--Area--><td style="text-align: center;"><p>Southern</p></td>
-        <!--Signatory--><td style="text-align: center;"><p>WML, APC, NESM</p></td>
+        <!--Signatory--><td style="text-align: center;"><p>LUC, APC</p></td>
         <!--Discharge--><td><p>Employees receiving notice of termination for any reason shall be allowed a reasonable amount of time (not less than 15 minutes) before the end of the regular work day to assemble their tools in addition to the normal pick-up time prevailing on the job.</p></td>
         <!--Show Up Time--><td><p>Other than on the first day of dispatch, in which case 2 hours shall apply, workers who report for work, for whom no employment is provided, shall be entitled to 4 hours pay, except where bad weather conditions beyond the control of the Individual Employer prevents employment. Except as hereinafter provided, carpenters who start work, but are discharged between the hours of 8:00 A.M. and 12:00 noon, shall receive 4 hours pay; carpenters starting work at 8:00 A.M. who are discharged between the hours of 12:00 noon and 4:30 P.M. shall receive pay only for hours worked.</p><p>Carpenters discharged on the first day of employment for inefficiency, insubordination or intoxication, shall receive pay only for hours worked.</p><p>Carpenters who voluntarily quit shall receive pay only for hours worked.</p></td>
-        <!--SAP--><td><p></p></td>
         <!--Employer Elected Drug Testing Program--><td><p></p></td>
         <!--Prior Notice of Testing--><td><p>Yes</p></td>
         <!--Pre-Employment Testing--><td><p>Yes; Employee Refusal:Denial of work at the jobsite for 3 months</p></td>
@@ -217,17 +208,15 @@
         <!--Probable/Resonable Cause--><td><p>Yes; Provide Consent for Urine Test for Drugs and/or Alcohol Form, Incident Report Form; opportunity for explanation</p></td>
         <!--Random/Periodic--><td><p>No; Exception: an employee who has tested positive under the policy and has directions from a rehab or drug treatment program</p></td>
         <!--D.O.T.--><td><p>Not specified</p></td>
-      <!--===========================================================================================-->
-      </tr>
-      <!-- ===========================================================================================-->
-       <tr>
-       <!--Status--><td style="text-align: center;"><p>Current</p></td>
+        <!--===========================================================================================-->
+        </tr>
+        <!-- ===========================================================================================-->
+        <tr>
         <!--Craft--><td style="text-align: center;"><p>Carpenters</p></td>
         <!--Area--><td style="text-align: center;"><p>Northern</p></td>
         <!--Signatory--><td style="text-align: center;"><p>WML, APC, NESM</p></td>
         <!--Discharge--><td><p><p>First 40 Hours:Employer can reject or discharge for any reason</p><p>After 40 hours: Employer can disharge for just cause only</p></td>
         <!--Show Up Time--><td><p>Carpenters discharged on the first day of employment for inefficiency, insubordination or intoxication, shall receive pay only for hours worked.</p></td>
-        <!--SAP--><td><p></p></td>
         <!--Employer Elected Drug Testing Program--><td><p></p></td>
         <!--Prior Notice of Testing--><td><p>No</p></td>
         <!--Pre-Employment Testing--><td><p>Yes; Employee Refusal:Denial of work at the jobsite for 3 months</p></td>
@@ -238,10 +227,9 @@
         <!--Probable/Resonable Cause--><td><p>Yes; Provide Consent for Urine Test for Drugs and/or Alcohol Form, Incident Report Form; opportunity for explanation</p></td>
         <!--Random/Periodic--><td><p>No; Exception: an employee who has tested positive under the policy and has directions from a rehab or drug treatment program</p></td>
         <!--D.O.T.--><td><p>Yes</p></td>
-      <!--===========================================================================================-->
-      
+        <!--===========================================================================================-->
       </tr>
-    </table>
+      </table>
 
     <script>
       // When the user scrolls down 20px from the top of the document, show the button
@@ -270,7 +258,6 @@
         exact_match: false,
         col_0: "select",
         col_1: "select",
-        col_2: "select",
         alternate_rows: true,
         btn_reset: true
       };
