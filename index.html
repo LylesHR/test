@@ -1,267 +1,379 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" >
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="content-type">
-    <meta content="noindex, nofollow" name="robots">
-    <meta content="noindex, nofollow" name="googlebot">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
-    <script language="javascript" src="https://lylesgroup.dynafile.com/df/pl.axd/54822f72-7a4d-4b7d-bb7b-cfd1d0824ec6"></script>
-    <link href="https://lylesgroup.dynafile.com/df/pl.axd/35e16155-f035-421d-ac56-9a64a56639b6" rel="stylesheet" type="text/css">
-    <style>
-      @import url('https://fonts.googleapis.com/css?family=Muli');
+<meta charset="UTF-8">
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
+<meta name="apple-mobile-web-app-title" content="CodePen">
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111" />
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css'>
+<link rel='stylesheet' href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
+  
+<style>
+.container {
+	width: auto !important;
+	padding: 2em;
+}
 
-      body {
-        font-size: 12px;
-        font-family: Muli, sans-serif;
-      }
+.bold-blue {
+	font-weight: bold;
+	color: #0277BD;
+}
+</style>
 
-      .mytable {
-        font-size: 14px !important;
-        font-family: Muli, sans-serif;
-        border: 1px solid #000;
-      }
-
-      th {
-        background-color: #007acc !important;
-        color: #FFF !important;
-        padding: 1px 0 1px 0;
-        font-family: Muli, sans-serif;
-        border: 1px solid #007acc;
-              }
-
-      td {
-        padding: 2px;
-        font-family: Muli, sans-serif;
-        vertical-align: top;
-      }
-
-      #flt0_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-
-      #flt1_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-
-      #flt2_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-
-      #flt3_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-
-      #flt4_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-
-      #flt5_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-
-      #flt6_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-       #flt7_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-        #flt8_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-        #flt9_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-        #flt10_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-        #flt11_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-        #flt12_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-      #flt13_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-      #flt14_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-      #flt15_mla {
-        height: 25px;
-        font-family: Muli, sans-serif;
-        font-size: 14px;
-      }
-      
-      p1 {
-        font-size: 10px !important;
-      }
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
 
 
-      ::-webkit-scrollbar {
-        -webkit-appearance: none !important;
-        width: 15px !important;
-      }
+</head>
 
-      ::-webkit-scrollbar-thumb {
-        height: 50px;
-        border-radius: 5px !important;
-        background-color: #007ACC !important;
-        -webkit-box-shadow: #000 !important;
-      }
+<body translate="no" >
+<div class="container">
+<table id="table" 
+			 data-toggle="table"
+			 data-search="false"
+			 data-filter-control="true" 
+			 data-show-export="false"
+			 data-click-to-select="true"
+			 data-toolbar="#toolbar">
+	<thead>
+		<tr>
+			<th data-field="Craft" data-filter-control="input" data-sortable="false">Craft</th>
+			<th data-field="Area" data-filter-control="input" data-sortable="false">Area</th>
+			<th data-field="Sig" data-filter-control="input" data-sortable="false">Signatory</th>
+			<th data-field="Discharge" data-filter-control="input">Discharge</th>
+            <th data-field="Show Up" data-filter-control="input" data-sortable="false">Show Up Time</th>
+			<th data-field="SAP" data-filter-control="input" data-sortable="false">SAP</th>
+			<th data-field="PNot" data-filter-control="input" data-sortable="false">Prior Notice of Testing</th>
+            <th data-field="PETest" data-filter-control="input">Pre-Employment Testing</th>
+			<th data-field="PETestTime" data-filter-control="input">Pre-Employment<br>Testing Time Frame</th>
+            <th data-field="CompTestNeg" data-filter-control="input" data-sortable="false">Comp for Time Testing</th>
+			<th data-field="PostAcc" data-filter-control="input" data-sortable="false">Post Accident</th>
+			<th data-field="ProbCause" data-filter-control="input">Probable/Reasonable Cause</th>
+            <th data-field="Random" data-filter-control="input">Random/Periodic</th>
+            <th data-field="DOT" data-filter-control="input">D.O.T.</th>
+</tr>
+	</thead>
+	<tbody>
+		<tr>
+		 <td>Carpenters</td>
+            <td>Northern</td>
+            <td>WML, APC, NESM</td>
+            <td>Employees receiving notice of termination for any reason shall be allowed a reasonable amount of time (not less than 15 minutes) before the end of the regular work day to assemble their tools in addition to the normal pick-up time prevailing on the job.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-      #myBtn {
-        display: none;
-        position: fixed;
-        bottom: 20px;
-        right: 30px;
-        z-index: 99;
-        font-size: 18px;
-        border: none;
-        outline: none;
-        background-color: red;
-        color: white;
-        cursor: pointer;
-        padding: 15px;
-        border-radius: 4px;
-      }
+		</tr>
+		<tr>
+		 <td>Carpenters</td>
+            <td>Southern</td>
+            <td>WML, APC, NESM</td>
+            <td>The first 5 days of employment of any employee shall be a probationary period during which time any terminations will not be challenged. All employees shall be notified 10 minutes in advance of termination and they shall be allowed the balance of the shift or half shift off to gather tools and personal belongings and shall be paid to the end of the shift or half shift.</td>
+           <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-      #myBtn:hover {
-        background-color: #555;
-      }
+		</tr>
+		<tr>
+			<td>Carpenters</td>
+            <td>San Diego</td>
+            <td>WML</td>
+            <td>Any employee may be terminated for refusing to submit to drug testing, drinking on 1he job, drunkenness, dishonesty or for any lawful reason which affects the employees qualification to perform work on the jobsite. Any discharge may be subject to the grievance procedure.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-    </style>
-  </head>
+		</tr>
+		<tr>
+		 <td>Cement Masons</td>
+            <td>Northern</td>
+            <td>WML, APC, NESM</td>
+            <td>During the first 40 hours, the Individual Employer may reject or discharge any employee for any reason. After 40 hours of employment, no Employee may be discharged without "just cause". An individual who is rejected or discharged for cause by the Individual Employer, including, but not limited to drug and alcohol pre-employment testing, shall not be referred to such Individual Employer for a period of 1 year from the date of rejection or discharge.</td>
+           <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-  <body>
-   <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-    <table class="mytable" id="mla">
-     <tr>
-        <th>Craft</th>
-        <th>Area</th>
-        <th>Signatory</th>
-        <th>Discharge</th>
-        <th>Show Up Time</th>
-        <th>Employer Elected Drug Testing Program</th>
-        <th>Prior Notice of Testing</th>
-        <th>Pre-Employment Testing</th>
-        <th>Pre-Employment Testing Time Frame</th>
-        <th>Compensation for Time Spent Testing (Negative Results)</th>
-        <th>Compensation for Time Spent Testing (Positive Results)</th>
-        <th>Post Accident</th>
-        <th>Probable/Resonable Cause</th>
-        <th>Random/Periodic</th>
-        <th>D.O.T.</th>
-        </tr>
-        <!-- ===========================================================================================-->
-        <tr> <!--Status-->
-        <!--Craft--><td style="text-align: center;"><p>Operators</p></td>
-        <!--Area--><td style="text-align: center;"><p>Southern</p></td>
-        <!--Signatory--><td style="text-align: center;"><p>LUC, APC</p></td>
-        <!--Discharge--><td><p>Employees receiving notice of termination for any reason shall be allowed a reasonable amount of time (not less than 15 minutes) before the end of the regular work day to assemble their tools in addition to the normal pick-up time prevailing on the job.</p></td>
-        <!--Show Up Time--><td><p>Other than on the first day of dispatch, in which case 2 hours shall apply, workers who report for work, for whom no employment is provided, shall be entitled to 4 hours pay, except where bad weather conditions beyond the control of the Individual Employer prevents employment. Except as hereinafter provided, carpenters who start work, but are discharged between the hours of 8:00 A.M. and 12:00 noon, shall receive 4 hours pay; carpenters starting work at 8:00 A.M. who are discharged between the hours of 12:00 noon and 4:30 P.M. shall receive pay only for hours worked.</p><p>Carpenters discharged on the first day of employment for inefficiency, insubordination or intoxication, shall receive pay only for hours worked.</p><p>Carpenters who voluntarily quit shall receive pay only for hours worked.</p></td>
-        <!--Employer Elected Drug Testing Program--><td><p></p></td>
-        <!--Prior Notice of Testing--><td><p>Yes</p></td>
-        <!--Pre-Employment Testing--><td><p>Yes; Employee Refusal:Denial of work at the jobsite for 3 months</p></td>
-        <!--Pre-Employment Testing Time Frame--><td><p>Not Specified</p></td>
-        <!--Compensation for Time Spent Testing (Negative Results)--><td><p>Yes; dispatched worker is entitled to show-up time or the actual time taken to drug test, whichever is greater</p></td>
-        <!--Compensation for Time Spent Testing (Positive Results)--><td><p>No; dispatched worker is not entitled to any form of pay</p></td>
-        <!--Post Accident--><td><p>Yes</p></td>
-        <!--Probable/Resonable Cause--><td><p>Yes; Provide Consent for Urine Test for Drugs and/or Alcohol Form, Incident Report Form; opportunity for explanation</p></td>
-        <!--Random/Periodic--><td><p>No; Exception: an employee who has tested positive under the policy and has directions from a rehab or drug treatment program</p></td>
-        <!--D.O.T.--><td><p>Not specified</p></td>
-        <!--===========================================================================================-->
-        </tr>
-        <!-- ===========================================================================================-->
-        <tr>
-        <!--Craft--><td style="text-align: center;"><p>Carpenters</p></td>
-        <!--Area--><td style="text-align: center;"><p>Northern</p></td>
-        <!--Signatory--><td style="text-align: center;"><p>WML, APC, NESM</p></td>
-        <!--Discharge--><td><p><p>First 40 Hours:Employer can reject or discharge for any reason</p><p>After 40 hours: Employer can disharge for just cause only</p></td>
-        <!--Show Up Time--><td><p>Carpenters discharged on the first day of employment for inefficiency, insubordination or intoxication, shall receive pay only for hours worked.</p></td>
-        <!--Employer Elected Drug Testing Program--><td><p></p></td>
-        <!--Prior Notice of Testing--><td><p>No</p></td>
-        <!--Pre-Employment Testing--><td><p>Yes; Employee Refusal:Denial of work at the jobsite for 3 months</p></td>
-        <!--Pre-Employment Testing Time Frame--><td><p>N/A</p></td>
-        <!--Compensation for Time Spent Testing (Negative Results)--><td><p>Yes; dispatched worker is entitled to show-up time or the actual time taken to drug test, whichever is greater</p></td>
-        <!--Compensation for Time Spent Testing (Positive Results)--><td><p>No; dispatched worker is not entitled to any form of pay</p></td>
-        <!--Post Accident--><td><p>No</p></td>
-        <!--Probable/Resonable Cause--><td><p>Yes; Provide Consent for Urine Test for Drugs and/or Alcohol Form, Incident Report Form; opportunity for explanation</p></td>
-        <!--Random/Periodic--><td><p>No; Exception: an employee who has tested positive under the policy and has directions from a rehab or drug treatment program</p></td>
-        <!--D.O.T.--><td><p>Yes</p></td>
-        <!--===========================================================================================-->
-      </tr>
-      </table>
+		</tr>
+		<tr>
+		  <td>Cement Masons</td>
+            <td>Southern</td>
+            <td>WML, APC, NESM</td>
+            <td>The first 5 days of employment of any employee shall be a probationary period during which time any termination will not be challenged.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-    <script>
-      // When the user scrolls down 20px from the top of the document, show the button
-      window.onscroll = function() {
-        scrollFunction()
-      };
+		</tr>
+		<tr>
+			
+		 <td>Cement Masons</td>
+            <td>San Diego</td>
+            <td>WML</td>
+            <td>Any employee may be terminated for refusing to submit to substance abuse screening, for drinking on the job, for drunkenness, for dishonesty or for any lawful reason, which affects the employee’s qualification to perform work on the jobsite. Any discharge may be subject to the grievance procedure.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-      function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-          document.getElementById("myBtn").style.display = "block";
-        } else {
-          document.getElementById("myBtn").style.display = "none";
-        }
-      }
+		</tr>
+		<tr>
+		  <td>Laborers</td>
+            <td>Northern</td>
+            <td>WML, APC, NESM, LUC</td>
+            <td>During the first 32 hours of employment, the Individual Employer may reject or discharge any employee for any reason. After 32 hours of employment, no employee shall be discharged without just cause.</td>
+           <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
-      // When the user clicks on the button, scroll to the top of the document
-      function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
-      }
+		</tr>
+		<tr>
+			
+			   <td>Laborers</td>
+            <td>Southern</td>
+            <td>WML, APC, LUC</td>
+            <td>Contractor retains the right to reject, for any reason, any job applicant referred by the employment facility. The Contractor may discharge any employee for any cause which he may deem sufficient, provided there shall be no discrimination on the part of the Contractor against any applicant or employee, nor shall any such employee be discharged by reason of any Union activity not interfering with the proper performance of his work.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
 
+		</tr>
+		<tr>
+		   <td>Laborers</td>
+            <td>San Diego</td>
+            <td>WML</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+		</tr>
+		<tr>
+		   <td>Operating Engineers</td>
+            <td>Northern</td>
+            <td>WML, APC, NESM, LUC</td>
+            <td>No Employee shall be discharged without "just cause". In the event of discharge without "just cause", the Employee may be reinstated with payment of wages and fringe benefits for time lost. Employees discharged for "just cause" shall be paid only for actual time worked.</td>
+           <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+		</tr>
+		<tr>
+		   <td>Operating Engineers</td>
+            <td>Southern</td>
+            <td>WML, APC, LUC</td>
+            <td>No employee shall be discharged or discriminated against. Any separation of employment for any reason, including discharge, may be subject to the Grievance procedure. When workmen are laid off or discharged, they must be paid wages due them at the time of layoff or discharge. In the event the Employer fails to pay employees laid off or discharged, they shall be paid waiting time at the straight-time rate of 8 hours per day, 5 days per week, until the time such payment has been made</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+		</tr>
+		<tr>
+		   <td>Operating Engineers</td>
+            <td>San Diego</td>
+            <td>WML</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+		</tr>
+         <tr>
+            <td>Operating Engineers</td>
+            <td>Northern-Private</td>
+            <td>LUC</td>
+            <td>"The Employer shall be the sole judge of the qualifications of all of his, her or its Employees, and may on such grounds discharge any of them for just cause.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+          </tr>
+          <tr>
+            <td>Pipe Trades</td>
+            <td>Southern 16</td>
+            <td>NESM</td>
+            <td>Except as they are limited by the terms of this Agreement, the prerogatives of management include, but are not limited to, the exclusive right to hire, promote, demote, transfer, discharge, increase or decrease the work force to meet the exigencies of the business, and to maintain the efficiency of the operation. Any of the rights, powers or authority the Employer had prior to the signing of this Agreement are retained by the Employer except those specifically abridged, delegated or modified by this Agreement</td>
+           <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Pipe Trades</td>
+            <td>Northern 36</td>
+            <td>NESM</td>
+            <td>Employees may be laid off or discharged at any time for just cause. Except in cases of discharge for just cause, no A-List employee shall be laid off or discharged until all D-List, C-List and B-List employees in the same work classification have been laid off or discharged in that order, e.g. “D”, then “C”, then “B” on a job by job basis. Among other just causes, it shall be deemed just cause for an Individual Employer to discharge an employee when the Individual Employer's insurance carrier has notified him in writing or by telegram that said employee may not drive any employer-owned vehicle due to the employee’s poor DMV driving record when the driving of the employer-owned vehicle is an essential requirement to the performance of the employee’s regular job functions and copies of the writing or telegram from the insurance carrier and of the DMV record relied upon have first been made available to the Local Union's Business Manager.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Plumbers/PipeFitters</td>
+            <td>CA Short (250, 246, 460, 342)</td>
+            <td>LUC</td>
+            <td>The individual Employer may discharge any employee for just cause.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>So. Fitters CA/Shortline</td>
+            <td>Southern 460</td>
+            <td>NESM, LUC</td>
+           <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+	</tbody>
+</table>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/editable/bootstrap-table-editable.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/export/bootstrap-table-export.js'></script>
+<script src='https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.js'></script>
+      <script id="rendered-js" >
+//exporte les données sélectionnées
+var $table = $('#table');
+$(function () {
+  $('#toolbar').find('select').change(function () {
+    $table.bootstrapTable('refreshOptions', {
+      exportDataType: $(this).val() });
+
+  });
+});
+
+var trBoldBlue = $("table");
+
+$(trBoldBlue).on("click", "tr", function () {
+  $(this).toggleClass("bold-blue");
+});
+//# sourceURL=pen.js
     </script>
+</body>
 
-    <script>
-      var mla_Props = {
-        exact_match: false,
-        col_0: "select",
-        col_1: "select",
-        alternate_rows: true,
-        btn_reset: true
-      };
-      var tf5 = setFilterGrid("mla", mla_Props);
-    </script>
-  </body>
 </html>
+ 
