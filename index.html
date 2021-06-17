@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title></title>
+  <title>LCG MLA</title>
   <meta name="robots" content="noindex, nofollow">
   <meta name="googlebot" content="noindex, nofollow">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -111,7 +111,7 @@
   </style>
 </head>
 <body>
-    <table id="example" class="display" style="width:100%">
+    <table id="MLA" class="display" style="width:100%">
         <thead>
             <tr>
           <th>Craft</th>
@@ -718,8 +718,8 @@
     <script>
     $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    $('#example thead tr').clone(true).appendTo( '#example thead' );
-    $('#example thead tr:eq(1) th').each( function (i) {
+    $('#MLA thead tr').clone(true).appendTo( '#MLA thead' );
+    $('#MLA thead tr:eq(1) th').each( function (i) {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="" />' );
  
@@ -733,7 +733,7 @@
         } );
     } );
  
-    var table = $('#example').DataTable( {
+    var table = $('#MLA').DataTable( {
         orderCellsTop: true,
         fixedHeader: true,
         bPaginate: false,
