@@ -1,365 +1,748 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>MLA Matrix</title>
-<meta name="author" content="Justin Winter">
-<meta charset="UTF-8">
-<meta http-equiv="content-type" content="text/html">
-<meta name="robots" content="noindex, nofollow">
-<meta name="googlebot" content="noindex, nofollow">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="icon" 
-      type="image/png" 
-      href="https://www.dropbox.com/s/m4s7fr85pau33if/favicon.png?raw=1">
-    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.min.css'>
-    <link rel='stylesheet' href='https://rawgit.com/vitalets/x-editable/master/dist/bootstrap3-editable/css/bootstrap-editable.css'>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title></title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+  <style>
+  @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+  body {
+  font-family: 'Open Sans', sans-serif;
+  }
+  
+  table.fixedHeader-floating{
+  position: fixed !important;
+  background-color:white
+  }
+       
+  thead input {
+  width: 100%;
+  }
+  
+ .dataTables_wrapper .dataTables_filter{
+  visibility: hidden !important;
+  position: fixed !important;
+  }
+  
+  example_filter {
+  visibility: hidden;
+  }
+    
+  table.dataTable {
+  width: 100%;
+  margin: 0 auto;
+  clear: both;
+  border-collapse: separate;
+  border-spacing: 0;
+  }
 
-    <style>
-      .container {
-        width: auto !important;
-        padding: 2em;
-      }
+  table.dataTable thead th,
+  table.dataTable tfoot th {
+  font-weight: bold
+  }
 
-      th {
-        text-align: center !important;
-      }
+  table.dataTable thead th,
+  table.dataTable thead td {
+  padding: 8px;
+  border-bottom: 1px solid #111
+  }
 
-    </style>
+  table.dataTable tbody tr {
+  background-color: #fff
+  }
 
-    <script>
-      window.console = window.console || function(t) {};
+  table.dataTable tbody tr.selected {
+  background-color: #b0bed9
+  }
 
-    </script>
-    <script>
-      if (document.location.search.match(/type=embed/gi)) {
-        window.parent.postMessage("resize", "*");
-      }
+  table.dataTable tbody th,
+  table.dataTable tbody td {
+  padding: 8px
+  }
 
-    </script>
-  </head>
+  table.dataTable.row-border tbody th,
+  table.dataTable.row-border tbody td,
+  table.dataTable.display tbody th,
+  table.dataTable.display tbody td {
+  border-top: 1px solid #ddd
+  }
 
-  <body translate="no">
-    <div class="container">
-      <table id="table" data-toggle="table" data-search="false" data-filter-control="true" data-show-export="false" data-click-to-select="false" data-toolbar="false">
+  table.dataTable.row-border tbody tr:first-child th,
+  table.dataTable.row-border tbody tr:first-child td,
+  table.dataTable.display tbody tr:first-child th,
+  table.dataTable.display tbody tr:first-child td {
+  border-top: none
+  }
 
-        <!-- Column Headers-->
+  table.dataTable.cell-border tbody tr th:first-child,
+  table.dataTable.cell-border tbody tr td:first-child {
+  border-left: 1px solid #ddd
+  }
+
+  table.dataTable.hover tbody tr:hover,
+  table.dataTable.display tbody tr:hover {
+  background-color: #f6f6f6
+  }
+
+  td {
+  vertical-align: top;
+  }
+  
+  .centerCell {
+  text-align: center;
+  padding-top: 25px !important;
+  }
+  
+  input {
+  font-family: 'Open-Sans', sans-serif;
+  font-size: 16px;
+  border-radius: 5px;
+  margin:0;
+  padding: 0;
+  height: 25px;
+  }
+  
+  </style>
+</head>
+<body>
+    <table id="example" class="display" style="width:100%">
         <thead>
-          <tr>
-            <th data-field="Craft" data-filter-control="input">Craft</th>
-            <th data-field="Area" data-filter-control="input">Area</th>
-            <th data-field="Sig" data-filter-control="input">Signatory</th>
-            <th data-field="Discharge" data-filter-control="input">Discharge</th>
-            <th data-field="Show Up" data-filter-control="input">Show Up Time</th>
-            <th data-field="SAP" data-filter-control="input">SAP</th>
-            <th data-field="PNot" data-filter-control="input">Prior Notice of Testing</th>
-            <th data-field="PETest" data-filter-control="input">Pre-Employment Testing</th>
-            <th data-field="PETestTime" data-filter-control="input">Pre-Employment<br>Testing Time Frame</th>
-            <th data-field="CompTestNeg" data-filter-control="input">Comp for Time Testing</th>
-            <th data-field="PostAcc" data-filter-control="input">Post Accident</th>
-            <th data-field="ProbCause" data-filter-control="input">Probable/Reasonable Cause</th>
-            <th data-field="Random" data-filter-control="input">Random/Periodic</th>
-            <th data-field="DOT" data-filter-control="input">D.O.T.</th>
-          </tr>
-          <!-- End Headers-->
+            <tr>
+          <th>Craft</th>
+          <th>Area</th>
+          <th>Signatory</th>
+          <th>Discharge</th>
+          <th>Show Up Time</th>
+          <th>Pre-Employment<br>Testing &amp; Timeframe</th>
+          <th>Prior Notice<br>Post Accident<br>DOT</th>
+          <th>Probable Cause<br>Reasonable Cause</th>
+          <th>Random<br>Periodic</th>
+          <th>Comp for Time Testing<br>(Negative)</th>
+          <th>Comp for Time Testing<br>(Positive)</th>
+            </tr>
         </thead>
         <tbody>
+        <tr>
+          <td class="centerCell">Carpenters</td>
+          <td class="centerCell">Northern</td>
+          <td class="centerCell">WML, APC, NESM</td>
+          <td>
+            <p>Employees receiving notice of termination for any reason shall be allowed a reasonable amount of time (not less than 15 minutes) before the end of the regular work day to assemble their tools in addition to the normal pick-up time prevailing on the job.</p>
+            <p>First 40 Hours: Employer can reject or discharge for any reason</p>
+            <p>After 40 hours: Employer can disharge for just cause only</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/f0e651aa-e12c-4bdf-90da-508881adff70#page=24">Section 30</a></p>
+          </td>
+          <td>
+            <p>Other than on the first day of dispatch, in which case 2 hours shall apply, workers who report for work, for whom no employment is provided, shall be entitled to 4 hours pay, except where bad weather conditions beyond the control of the Individual Employer prevents employment. Except as hereinafter provided, carpenters who start work, but are discharged between the hours of 8:00 A.M. and 12:00 noon, shall receive 4 hours pay; carpenters starting work at 8:00 A.M. who are discharged between the hours of 12:00 noon and 4:30 P.M. shall receive pay only for hours worked.<br><br>Carpenters discharged on the first day of employment for inefficiency, insubordination or intoxication, shall receive pay only for hours worked.
+              Carpenters who voluntarily quit shall receive pay only for hours worked.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/f0e651aa-e12c-4bdf-90da-508881adff70#page=24" target="_blank">Section 30</a></p>
+          </td>
+          <td>
+            <p>Yes; Employee Refusal: Denial of work at the jobsite for 3 months</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Yes</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Not Specified</p>
+          </td>
+          <td>
+            <p>Yes; Provide Consent for Urine Test for Drugs and/or Alcohol Form, Incident Report Form; opportunity for explanation</p>
+          </td>
+          <td>
+            <p>No; Exception: an employee who has tested positive under the policy and has directions from a rehab or drug treatment program</p>
+          </td>
+          <td>
+            <p>Yes; dispatched worker is entitled to show-up time or the actual time taken to drug test, whichever is greater</p>
+          </td>
+          <td>
+            <p>No; dispatched worker is not entitled to any form of pay</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Carpenters</td>
+          <td class="centerCell">Southern</td>
+          <td class="centerCell">WML, APC, NESM</td>
+          <td>
+            <p>The first 5 days of employment of any employee shall be a probationary period during which time any terminations will not be challenged. All employees shall be notified 10 minutes in advance of termination and they shall be allowed the balance of the shift or half shift off to gather tools and personal belongings and shall be paid to the end of the shift or half shift.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/fed11945-b23e-4732-9e1a-36fd8dd7e196#page=15" target="_blank">Section 209</a></p>
+          </td>
+          <td>
+            <p>Any workman or employee reporting for work at the regular starting time and for whom no work is provided shall receive pay for 2 hours at the stipulated rate for so reporting, unless he has been notified before the end of his last preceding shift not to report.</p>
+            <p>Any workman or employee who reports for work and for whom work is provided shall receive not less than 4 hours pay at the straight-time hourly rate.</p>
+            <p>If more than 4 hours are worked in any 1 day, but less than 6 hours, he shall receive not less than 6 hours pay at the straight-time hourly rate and if an employee works more than 6 hours but less than 8 hours, he shall receive not less than 8 hour’s pay at the straight-time hourly rate, unless prevented from working for reasons beyond the control of the Contractor, including, but not limited by, such factors as inclement weather, a breakdown causing discontinuance of a major unit of the project during which time workmen or employees are not required or requested to remain on the project by the Contractor or his agent.</p>
+            <p>Workmen, or employees who arrive in an unfit condition for work without proper tools, credentials, or who are not ready to go to work or who are not otherwise qualified shall not be paid show-up time or subsistence.</p>
+            <p>Carpenters who voluntarily quit shall receive pay only for hours worked.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/fed11945-b23e-4732-9e1a-36fd8dd7e196#page=33" target="_blank">Section 1608</a></p>
+          </td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Not Specified</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes; observed by 2 employees; must use Appendix A Checklist and Incident Form</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes; dispatched worker is entitled to show-up time or the actual time taken to drug test, whichever is greater; up to a maximum of 2 hours travel time plus lab time</p>
+          </td>
+          <td>
+            <p>No; dispatched worker is not entitled to any form of pay</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Carpenters</td>
+          <td class="centerCell">San Diego</td>
+          <td class="centerCell">WML</td>
+          <td>
+            <p>Any employee may be terminated for refusing to submit to drug testing, drinking on the job, drunkenness, dishonesty or for any lawful reason which affects the employees qualification to perform work on the jobsite. Any discharge may be subject to the grievance procedure.</p>
+            <p>Page 7; Section 14</p>
+          </td>
+          <td>
+            <p>An employee taking and passing a drug test will be paid for the time taken testing, up to 2 hours.</p>
+            <p>A workman will be paid 2 hours show-up time when he has been dispatched in accordance with this Agreement and has reported for work at a starting time established by the Employer and when no work is provided.</p>
+            <p>A workman will NOT be paid show-up time when: <ul>
+                <li>The Employer has notified the Union, in writing, NOT to refer said workman for re-employment</li>
+                <li>He fails to report by the starting time established by the Employer and specified at time of ordering the workman. The Employer may waive his paragraph by hiring the workman, regardless of time of report</li>
+                <li>He reports for work in unfit condition or without proper tools, referral, or credentials</li>
+                <li>He is unable or refuses to perform the specified work for which he was requested, in which case the Employer or his representatives shall immediately notify the Union.</li>
+              </ul>
+              <p>If the employee is unable to perform the specified work for which he was requested, he shall be paid only for actual time worked.<br>He has been notified before the end of the last preceding shift not to report.</p>
+              <p><b>EXCEPTIONS to (A) and (B) above:</b> In the event of inclement weather, major breakdown or suspension of the project or portion thereof which is beyond the Employer's control, the Employer will make a reasonable effort to notify employees not to report, and no show-up time will be paid. Each Employer shall establish a policy concerning employees reporting for work during inclement weather. Such policy shall be communicated in writing to the Union. The Employer's policy may be varied on a project basis by written notice to the Union. When employees report and are put to work, and work is discontinued because of inclement weather, major breakdown, or suspension of the project which is beyond the Employer's control, they shall receive pay for the actual hours worked.</p>
+              <p>An employee discharged for incompetence shall receive pay for the actual hours worked.</p>
+              <p>Notwithstanding provisions contained elsewhere in this Agreement and except as provided in (C) and (D) above, any employee who reports for work, and for whom work is provided, shall receive not less than 4 hours pay, and if more than 4 hours are worked in any 1 day he shall receive 6 hours pay and if more than 6 hours are worked in any one day he shall receive 8 hours pay.</p>
+              <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/49e35f9f-d193-483e-a932-b5daadb5fff8#page=16" target="_blank">Page 16; I</a></p>
+          </td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Not Specified</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes; observed by 2 employees; must use Attachment 1 or a similar Checklist and Incident Form</p>
+          </td>
+          <td>
+            <p>No</p>
+          </td>
+          <td>
+            <p>Yes; dispatched worker is entitled to show-up time or the actual time taken to drug test, whichever is greater; up to a maximum of 2 hours travel time plus lab time</p>
+          </td>
+          <td>
+            <p>No; dispatched worker is not entitled to any form of pay</p>
+          </td>
+        </tr>
+ <tr>
+          <td class="centerCell">Cement Masons</td>
+          <td class="centerCell">Northern</td>
+          <td class="centerCell">WML, APC, NESM</td>
+          <td>
+            <p>During the first 40 hours, the Individual Employer may reject or discharge any employee for any reason.</p>
+            <p>After 40 hours of employment, no Employee may be discharged without "just cause".</p>
+            <p>An individual who is rejected or discharged for cause by the Individual Employer, including, but not limited to drug and alcohol pre-employment testing, shall not be referred to such Individual Employer for a period of 1 year from the date of rejection or discharge.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/a3257d86-0ccf-422e-9afa-17026d439737#page=10" target="_blank">Page 10; 7</a></p>
+          </td>
+          <td>
+            <p>Any workman reporting for work at the regular starting time and for whom no work is provided shall receive pay for 2 hours at the stipulated rate for so reporting unless he has been notified before the end of his last preceding shift not to report. Any Employee who reports to work and for whom work is provided shall receive not less than 4 hours' pay and if more than 4 hours are worked in any 1 day shall receive not less than a full day's pay therefore, unless, prevented from working for reasons beyond the control of the Individual Employer, including but not limited by such factors as inclement weather or breakdown causing discontinuance of a major unit of the project during which time workmen are not required or requested to remain on the job by the Individual Employer or his agent.</p>
+            <p>On the first day of dispatch an individual’s work day shall commence at 8:00 a.m. without regard to the earlier scheduled crew start time.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/a3257d86-0ccf-422e-9afa-17026d439737#page=20" target="_blank">Page 20; F</a></p>
+          </td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Time of Dispatch</p>
+            <p>Post Accident: Not Specified</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes; however employer must give 30 days notice prior to implementing random drug screening program</p>
+          </td>
+          <td>
+            <p>Yes; no less than two hours of show up pay</p>
+          </td>
+          <td>
+            <p>No; dispatched worker is not entitled to any form of pay</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Cement Masons</td>
+          <td class="centerCell">Southern</td>
+          <td class="centerCell">WML, APC, NESM</td>
+          <td>
+            <p>The first 5 days of employment of any employee shall be a probationary period during which time any termination will not be challenged.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/bff415c5-0f35-4731-8715-d5f7a293962d#page=10" target="_blank">Page 6; 302</a></p>
+          </td>
+          <td>
+            <p>Any workman or employee reporting for work at the regular starting time for whom no work is provided shall receive pay for 2 hours at the stipulated rate and all fringe benefits for his classification for so reporting unless he has been notified before the end of his last preceding shift not to report or the employer notifies the employee by phone not to report no less than 3 hours prior to starting time or during a period of inclement weather, the Contractor has instructed the employee to call a designated job number provided to him for instructions concerning reporting to the job site and the employee has either failed to do so or the employee called and was instructed not to report.</p>
+            <p>Any employee who reports for work and for whom work is provided shall receive not less than 4 hours' pay and all fringe benefits for his classification.</p>
+            <p>If more than four hours are worked in any 1 day, the employee shall receive not less than a full day's pay therefore, unless prevented from working for reasons beyond the control of the employer, including, but not limited by, such factors as inclement weather, or breakdown causing discontinuance of a major unit of the project during which time employees are not required or requested to remain on the project by the Employer or his agent.</p>
+            <p>Workmen or employees referred under Article III of this Agreement to the Employers' job who arrive in an unfit condition for work without proper tools, credentials, including proper documentation as set forth on INS I-9 form, or who are not ready to go to work or who are not otherwise qualified shall not be paid show-up time, or subsistence.</p>
+            <p>Exception in the case of 1602.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/bff415c5-0f35-4731-8715-d5f7a293962d#page=28" target="_blank">Page 24; 1609</a>
+          </td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Yes</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes; however must not be implemented within first 30 days on jobsite, all employees or subcontractor employees who worked on project 3 working days before or after the date of the test must be tested and prior training is required to educate about the random testing</p>
+          </td>
+          <td>
+            <p>Yes; dispatched worker is entitled to show-up time or the actual time taken to drug test, whichever is greater; up to a maximum of 2 hours travel time plus lab time</p>
+          </td>
+          <td>
+            <p>No; dispatched worker is not entitled to any form of pay.</p>
+            <p>In the event of a positive test result, we must refer the applicant to a clinic to be retested.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Cement Masons</td>
+          <td class="centerCell">San Diego</td>
+          <td class="centerCell">WML</td>
+          <td>
+            <p>Any employee may be terminated for refusing to submit to substance abuse screening, for drinking on the job, for drunkenness, for dishonesty or for any lawful reason, which affects the employee’s qualification to perform work on the jobsite.</p>
+            <p>Any discharge may be subject to the grievance procedure.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/e16d8978-a5d7-4c67-91c1-a8e48384a34a#page=10" target="_blank">Page 10; Section 13</a></p>
+          </td>
+          <td>
+            <p>Any employee who reports for work shall receive not less than 2 hours pay, and if more than 2 hours are worked in any 1 day, he shall receive 4 hours pay, and if more than 4 hours are worked in any 1 day, he shall receive 8 hours pay [...] unless the reason for the stoppage is due to inclement weather.</p>
+            <p>OT Days: When employee works more than 4 hours, they shall be paid only for actual hours worked at the OT rate.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/e16d8978-a5d7-4c67-91c1-a8e48384a34a#page=19" target="_blank">Page 19; #3</a></p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td></td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Laborers</td>
+          <td class="centerCell">Northern</td>
+          <td class="centerCell">WML, APC, NESM, LUC</td>
+          <td>
+            <p>During the first 40 hours of employment, the Individual Employer may reject or discharge any employee for any reason.</p>
+            <p>After 40 hours of employment, no employee shall be discharged without just cause.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/1361a3bb-95fe-4e00-b1de-ffa393ace54b#page=18" target="_blank">Page 14; C</a></p>
+          </td>
+          <td>
+            <p>The Individual Employer is not obligated to pay show-up time to any applicant/employee who fails to comply with the company code of safe practices.</p>
+            <p>When any employee reports for work and there is no work provided by the Individual Employer, he/she shall be paid 2 hours show-up time at the applicable rate plus zone pay where applicable.</p>
+            <p>No show-up time will be payable to any person who reports for work without the necessary and legally required documentation to establish work right status under applicable Immigration and Naturalization Laws.</p>
+            <p>If work is suspended on account of weather conditions, the employee shall be entitled to show-up time only if he/she remains on the job site for 2 hours pending abatement of such weather unless sent home earlier by the Individual Employer.</p>
+            <p>If work is to be suspended for any reason, the employee shall be notified at least 2 hours before being required to report for work.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/1361a3bb-95fe-4e00-b1de-ffa393ace54b#page=18" target="_blank">Page 15; Section 4</a></p>
+          </td>
+          <td>
+            <p>Not Specified; Discretion of Individual Employer;</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Not Specified</p>
+            <p>Post Accident: Not Specified</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes; must give 30 days notice prior to program implementation</p>
+          </td>
+          <td>
+            <p>Not Specified</p>
+          </td>
+          <td>
+            <p>No; unless work was performed for the individual employer in which compensation would be paid</p>
+          </td>
+        </tr>
+<tr>
+          <td class="centerCell">Laborers</td>
+          <td class="centerCell">Southern</td>
+          <td class="centerCell">WML, APC, LUC</td>
+          <td>
+            <p>Contractor retains the right to reject, for any reason, any job applicant referred by the employment facility. The Contractor may discharge any employee for any cause which he may deem sufficient, provided there shall be no discrimination on the part of the Contractor against any applicant or employee, nor shall any such employee be discharged by reason of any Union activity not interfering with the proper performance of his work.</p>
+            <p>*Not sure where this is located</p>
+          </td>
+          <td>
+            <p>Any workman or employee reporting for work at the regular starting time and for whom no work is provided shall receive pay for 2 hours at the stipulated rate for so reporting, unless he has been notified before the end of his last preceding shift not to report or during a period of inclement weather, the Contractor has instructed the employee to call a designated job number provided to him for instructions concerning reporting to the job site and the employee has either failed to do so or the employee called and was instructed not to report.</p>
+            <p>Any workman or employee who reports for work and for whom work is provided shall receive not less than 4 hours’ pay; and if more than 4 hours are worked in any one day, but less than 6 hours, he shall receive not less than 6 hours pay at the straight-time hourly rate and if an employee works more than 6 hours but less than 8 hours, he shall receive not less than 8 hours pay at the straight-time hourly rate unless prevented from working for reasons beyond the control of the Contractor, including, but not limited by, such factors as inclement weather, a breakdown causing discontinuance of a major unit of the project during which time workmen or employees are not required or requested to remain on the project by the Contractor or his agent.</p>
+            <p>New employees on their first day of work shall be paid for their actual time worked.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/bd629862-a464-48e0-8d66-f55bbbb49620#page=39" target="_blank">Page 37; M1</a></p>
+          </td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Not Specified</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes; observed by 2 employees; must use Appendix A Checklist and Incident Form</p>
+          </td>
+          <td>
+            <p>Yes, must notify Union at least 3 days prior to intent of implementing company wide random testing program.</p>
+          </td>
+          <td>
+            <p>Yes; dispatched worker is entitled to show-up time or the actual time taken to drug test, whichever is greater; up to a maximum of 2 hours travel time plus lab time</p>
+          </td>
+          <td>
+            <p>No; dispatched worker is not entitled to any form of pay.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Laborers</td>
+          <td class="centerCell">San Diego</td>
+          <td class="centerCell">WML</td>
+          <td>
+            <p>Contractor retains the right to reject, for any reason, any job applicant referred by the employment facility. The Contractor may discharge any employee for any cause which he may deem sufficient, provided there shall be no discrimination on the part of the Contractor against any applicant or employee, nor shall any such employee be discharged by reason of any Union activity not interfering with the proper performance of his work.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/9db28de1-8d3b-4310-9c3d-1d6d035afd1c#page=19" target="_blank">Page 16; Section 13</a></p>
+          </td>
+          <td>
+            <p>Any workman or employee reporting for work at the regular starting time and for whom no work is provided, shall receive pay for two (2) hours, unless, they were notified before the end of their last shift or they are notified prior to leaving home any workman or employee who reports for work and for whom work is provided shall receive not less than four (4) hours pay; and if more than four (4) hours are worked in any one day, they shall receive not less than six (6) hours pay and if more than six (6) hours worked, they will get paid for the full day, unless prevented from working for reasons beyond the control of the Contractor, including but not limited to, inclement weather, a breakdown of major unit causing discountinuance in which Contractor does not require employees to stay.</p>
+            <p>New employees on their first day of work shall be paid for their actual time worked.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/9db28de1-8d3b-4310-9c3d-1d6d035afd1c#page=37" target="_blank">Page 34; R</a></p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td>
+            <p></p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+          <td>
+            <p>Not Specified; Employer's right to establish a drug testing policy</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Operating Engineers</td>
+          <td class="centerCell">Northern</td>
+          <td class="centerCell">WML, APC, NESM, LUC</td>
+          <td>
+            <p>No Employee shall be discharged without "just cause". In the event of discharge without "just cause", the Employee may be reinstated with payment of wages and fringe benefits for time lost.</p>
+            <p>Employees discharged for "just cause" shall be paid only for actual time worked.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/2c719d4e-a53b-423d-a98a-023eb0d71925#page=40" target="_blank">Page 35; 04.03.02</a></p>
+          </td>
+          <td>
+            <p>When an Employee reports on his/her shift, or when dispatched and he/she reports at the agreed time and designated place and there is no work covered, he/she shall be paid 2 hours at the rate applicable to his/her classification at the straight-time hourly or overtime rate applicable on that day as show-up time;</p>
+            <p>If the Employee is requested to stand by, and does so, and is given no work, he/she shall be paid 4 hours' pay at the rate applying to the job or unless such Employee or applicant reported in a condition unfit to perform his/her work If his work is suspended on account of weather conditions, the Employee shall be entitled to show-up time only if he/she remains on the jobsite for 2 hours pending abatement of such weather, unless sent home earlier by the Individual Employer.</p>
+            <p>If an Employee's work is to be suspended for any reason, the Employee shall be notified at least 2 hours before being required to report on his shift.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/2c719d4e-a53b-423d-a98a-023eb0d71925#page=50" target="_blank">Page 45; 06.21.00</a></p>
+          </td>
+          <td>
+            <p>Yes; Must complete form A- Employee Consent &amp; Release Form</p>
+            <p>Timeframe: 1-3 days; employee will either be put to work or paid while results are pending provided a negative result is received.</p>
+          </td>
+          <td>
+            <p>Prior Notice: Yes</p>
+            <p>Post Accident: Yes; Post accident form required</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes; Incident Report Form must be completed, provided to employee, reviewed and understood by employee. Explanation opportunity must be given to employee.</p>
+          </td>
+          <td>
+            <p>Yes; must state in Notice of Drug Testing the employee is subject to random tests. Must notify Union and Employees 30 days prior to implementing program</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>If first test is positive, employee can request to test again within 72 hours. If the second test is negative, the employee will consider to have been negative.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Operating Engineers</td>
+          <td class="centerCell">Southern</td>
+          <td class="centerCell">WML, APC, LUC</td>
+          <td>
+            <p>No employee shall be discharged or discriminated against. Any separation of employment for any reason, including discharge, may be subject to the Grievance procedure.</p>
+            <p>When workmen are laid off or discharged, they must be paid wages due them at the time of layoff or discharge. In the event the Employer fails to pay employees laid off or discharged, they shall be paid waiting time at the straight-time rate of 8 hours per day, 5 days per week, until the time such payment has been made.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/f6f2fec8-9389-4682-81be-401efed1f2a8#page=35" target="_blank">Page 32; I5 &amp; K2</a></p>
+          </td>
+          <td>
+            <p>Any employee reporting for work at the regular starting time and for whom no work is provided shall receive pay for 2 hours at the stipulated rate for so reporting unless he has been notified before the end of his last preceding shift not to report, or the Employer has notified the employee prior to leaving home, not to report. Any employee who reports for work and for whom work is provided shall receive not less than 4 hours pay, and if more than 4 hours are worked in any 1 day, shall receive not less than 6 hours pay, and if more than 6 hours are worked in any 1 day, shall receive not less than 8 hours pay.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/f6f2fec8-9389-4682-81be-401efed1f2a8#page=35" target="_blank">Page 31; H</a></p>
+          </td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Applicants who are put to work pending the results of a test will be considered probationary employees</p>
+          </td>
+          <td>
+            <p>Prior Notice: Not Specified</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes; however must not be implemented within first 15 days on jobsite, all employees or subcontractor employees who worked on project 3 working days before or after the date of the test must be tested and prior training is required to educate about the random testing; Only 2 periodic tests within 12 month period</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>No; If first test is positive, employee can request a sample of their test within 48 hours to take to a 2nd Lab totest again within 10 days. If the second test is negative, the employer has the option to require a third test.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Operating Engineers</td>
+          <td class="centerCell">San Diego</td>
+          <td class="centerCell">WML</td>
+          <td>
+            <p>No employee shall be discharged or discriminated against and any separation of employment for any reason may be subject to the Grievance Procedure. When workmen are laid off or discharged, they must be paid wages due them at the time of layoff or discharge.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/865f7366-322f-4dfc-87c8-06cddc7f7b50#page=42" target="_blank">Page 38; F6 &amp; Page 39; H2</a></p>
+          </td>
+          <td>
+            <p>Any workman or employee reporting for work at the regular starting time and for whom no work is provided, shall receive pay for two (2) hours unless, they were notified before the end of their last shift or they are notified prior to leaving home, any workman or employee who reports for work and for whom work is provided shall receive not less than four (4) hours pay; and if more than four (4) hours are worked in any one day, they shall receive not less than six (6) hours pay and if more than six (6) hours worked, they will get paid for the full day, unless prevented from working for reasons beyond the control of the Contractor, including but not limited to, inclement weather, a breakdown of major unit causing discountinuance in which Contractor does not require employees to stay.</p>
+            <p>New employees on their first day of work shall be paid for their actual time worked.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/865f7366-322f-4dfc-87c8-06cddc7f7b50#page=40" target="_blank">Page 36; E</a></p>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="centerCell">Operating Engineers</td>
+          <td class="centerCell">Northern-Private</td>
+          <td class="centerCell">LUC</td>
+          <td>
+            <p>The Employer shall be the sole judge of the qualifications of all of his, her or its Employees, and may on such grounds discharge any of them for just cause.</p>
+            <p>Page 3; 03.11.00</p>
+          </td>
+          <td>
+            <p>The Private Utility Agreement does not outline show-up pay</p>
+          </td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td class="centerCell">Pipe Trades</td>
+          <td class="centerCell">Southern 16</td>
+          <td class="centerCell">NESM</td>
+          <td>
+            <p>Except as they are limited by the terms of this Agreement, the prerogatives of management include, but are not limited to, the exclusive right to hire, promote, demote, transfer, discharge, increase or decrease the work force to meet the exigencies of the business, and to maintain the efficiency of the operation. Any of the rights, powers or authority the Employer had prior to the signing of this Agreement are retained by the Employer except those specifically abridged, delegated or modified by this Agreement.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/8acd30db-8caa-4d8a-af76-dd5c9dfa7d52#page=6" target="_blank">Page 2; Section 3</a></p>
+          </td>
+          <td>
+            <p>Any Workman, after being hired and reporting for work at the regular starting time and for whom no work is provided, shall receive pay for 2 hours at the prevailing rate of wages, unless he has been notified by the Contractor before leaving his home not to report; and any workman who reports to work, and for whom work is provided, shall receive not less than 4 hours’ pay, and if more than 4 hours are worked in any 1 day, shall receive not less than a full day’s pay. However, the exception shall be when strike or weather conditions make it impossible to put such an employee to work, where stoppage of work is occasioned thereby, or when a workman leaves his work of his own accord.</p>
+            <p>An employee reporting to work at the regular starting time at a shop or job and for whom no work is available, due to weather conditions, will receive no pay for reporting time unless requested by the Employer to report.</p>
+            <p>The Employer retains the right to reject a job applicant referred by the Union. It is understood that any applicant referred by the Union and rejected shall receive 2 hours’ show up pay, or 4 hours if worked, except for work performed under Appendix D, Section D.2.</p>
+            <p>After starting to work and work is stopped because of weather conditions the employee shall receive pay for the actual time on the job, but in no event less than 2 hours. The Employer shall have sole responsibility to determine availability of work due to weather conditions.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/8acd30db-8caa-4d8a-af76-dd5c9dfa7d52#page=7" target="_blank">Page 3; 4.1.3</a> &amp; <a href="https://lylesgroup.dynafile.com/df/pl.axd/8acd30db-8caa-4d8a-af76-dd5c9dfa7d52#page=27" target="_blank">Page 23; D.3.5</a></p>
+          </td>
+          <td>
+            <p>Yes; Consent and release form</p>
+            <p>Timeframe: Not specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Not Specified</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Not specified</p>
+          </td>
+          <td>
+            <p>Yes; Paid 2 hours of straight time</p>
+          </td>
+          <td>
+            <p>No; however the employee has two business days to request their original sample be retested by a lab. In the event it is negative, the employer will pay for the tests and paid any back wages and benefits lost.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Pipe Trades</td>
+          <td class="centerCell">Northern 36</td>
+          <td class="centerCell">NESM</td>
+          <td>
+            <p>Employees may be laid off or discharged at any time for just cause.</p>
+            <p>Except in cases of discharge for just cause, no A-List employee shall be laid off or discharged until all D-List, C-List and B-List employees in the same work classification have been laid off or discharged in that order, e.g. “D”, then “C”, then “B” on a job by job basis.</p>
+            <p>Among other just causes, it shall be deemed just cause for an Individual Employer to discharge an employee when the Individual Employer's insurance carrier has notified him in writing or by telegram that said employee may not drive any employer-owned vehicle due to the employee’s poor DMV driving record when the driving of the employer-owned vehicle is an essential requirement to the performance of the employee’s regular job functions and copies of the writing or telegram from the insurance carrier and of the DMV record relied upon have first been made available to the Local Union's Business Manager.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/73389dcc-501a-4aac-b380-4d3885743acb#page=14" target="_blank">Page 10; Section 9</a></p>
+          </td>
+          <td>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/73389dcc-501a-4aac-b380-4d3885743acb#page=13" target="_blank">Page 9; Section 8 (B)</a></p>
+          </td>
+          <td>
+            <p>Yes; Consent form</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Not Specified</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes; Random selections made 12 per year employees will be selected by a computer to ensure no employee can be singled out. They will have 10 calendar days upon notification to complete the random testing. Minumum notice to employee- 24 hours.</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>No; however the employee has two business days to request their original sample be retested by a lab. In the event it is negative, the employer will pay for the tests and paid any back wages and benefits lost.</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">Plumbers/Pipefitters</td>
+          <td class="centerCell">CA Short: 250, 246, 460, 342</td>
+          <td class="centerCell">LUC</td>
+          <td>
+            <p>The individual Employer may discharge any employee for just cause.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/6913933c-5e0e-42c2-96f3-4c184f8ba34e#page=9" target="_blank">Page 7; H</a></p>
+          </td>
+          <td>
+            <p>Any employee reporting for work at the regular starting time and for whom no work is provided shall receive pay for 2 hours at the regular straight time rate for so reporting, unless he has been notified before the end of his last preceding shift not to report. Any employee who reports for work and for whom work is provided shall receive not less than 4 hours pay; and if more than 4 hours are worked in any one day, shall receive not less than 8 hours pay therefor.</p>
+            <p>Any employee reporting for work at the regular starting time at the job, and for whom no work is available due to weather conditions, shall receive 2 hours pay for reporting time. To be eligible to receive such reporting pay, the employee must check in at the job at the regular starting time and remain there for 2 hours.</p>
+            <p>Drug testing and pre-employment orientation and training for the employee to take, shall be paid for all the actual hours to complete this task at the straight time rate. If this task is performed during overtime hours or holiday hours, such testing or training shall be paid at the appropriate overtime rate.</p>
+            <p><a href="https://lylesgroup.dynafile.com/df/pl.axd/6913933c-5e0e-42c2-96f3-4c184f8ba34e#page=17" target="_blank">Page 15-16; Article 13</a></p>
+          </td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Per the contractor</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Not Specified</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes;Must be paid 2 hours show up time.</p>
+          </td>
+          <td>
+            <p>No</p>
+          </td>
+        </tr>
+        <tr>
+          <td class="centerCell">So. Fitters CA Shortline</td>
+          <td class="centerCell">Southern 460</td>
+          <td class="centerCell">NESM, LUC</td>
+          <td></td>
+          <td></td>
+          <td>
+            <p>Yes</p>
+            <p>Timeframe: Not Specified</p>
+          </td>
+          <td>
+            <p>Prior Notice: Per the contractor</p>
+            <p>Post Accident: Yes</p>
+            <p>DOT: Not Specified</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Yes</p>
+          </td>
+          <td>
+            <p>Not Specified</p>
+          </td>
+          <td>
+            <p>Not Specified</p>
+          </td>
+        </tr>
 
-          <tr>
-            <td>Carpenters</td>
-            <td>Northern</td>
-            <td>WML, APC, NESM</td>
-            <td>Employees receiving notice of termination for any reason shall be allowed a reasonable amount of time (not less than 15 minutes) before the end of the regular work day to assemble their tools in addition to the normal pick-up time prevailing on the job.</td>
-            <td>Other than on the first day of dispatch, in which case 2 hours shall apply, workers who report for work, for whom no employment is provided, shall be entitled to 4 hours pay, except where bad weather conditions beyond the control of the Individual Employer prevents employment. Except as hereinafter provided, carpenters who start work, but are discharged between the hours of 8:00 A.M. and 12:00 noon, shall receive 4 hours pay; carpenters starting work at 8:00 A.M. who are discharged between the hours of 12:00 noon and 4:30 P.M. shall receive pay only for hours worked.Carpenters discharged on the first day of employment for inefficiency, insubordination or intoxication, shall receive pay only for hours worked.
-              Carpenters who voluntarily quit shall receive pay only for hours worked.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
 
-          </tr>
-          <tr>
-            <td>Carpenters</td>
-            <td>Southern</td>
-            <td>WML, APC, NESM</td>
-            <td>The first 5 days of employment of any employee shall be a probationary period during which time any terminations will not be challenged. All employees shall be notified 10 minutes in advance of termination and they shall be allowed the balance of the shift or half shift off to gather tools and personal belongings and shall be paid to the end of the shift or half shift.</td>
-            <td>Any workman or employee reporting for work at the regular starting time and for whom no work is provided shall receive pay for 2 hours at the stipulated rate for so reporting, unless he has been notified before the end of his last preceding shift not to report. Any workman or employee who reports for work and for whom work is provided shall receive not less than 4 hours pay at the straight-time hourly rate.
-              If more than 4 hours are worked in any 1 day, but less than 6 hours, he shall receive not less than 6 hours pay at the straight-time hourly rate and if an employee works more than 6 hours but less than 8 hours, he shall receive not less than 8 hour’s pay at the straight-time hourly rate, unless prevented from working for reasons beyond the control of the Contractor, including, but not limited by, such factors as inclement weather, a breakdown causing discontinuance of a major unit of the project during which time workmen or employees are not required or requested to remain on the project by the Contractor or his agent. Workmen, or employees who arrive in an unfit condition for work without proper tools, credentials, or who are not ready to go to work or who are not otherwise qualified shall not be paid show-up time or subsistence. Carpenters who voluntarily quit shall receive pay only for hours worked.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
 
-          </tr>
-          <tr>
-            <td>Carpenters</td>
-            <td>San Diego</td>
-            <td>WML</td>
-            <td>Any employee may be terminated for refusing to submit to drug testing, drinking on 1he job, drunkenness, dishonesty or for any lawful reason which affects the employees qualification to perform work on the jobsite. Any discharge may be subject to the grievance procedure.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Cement Masons</td>
-            <td>Northern</td>
-            <td>WML, APC, NESM</td>
-            <td>During the first 40 hours, the Individual Employer may reject or discharge any employee for any reason. After 40 hours of employment, no Employee may be discharged without "just cause". An individual who is rejected or discharged for cause by the Individual Employer, including, but not limited to drug and alcohol pre-employment testing, shall not be referred to such Individual Employer for a period of 1 year from the date of rejection or discharge.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Cement Masons</td>
-            <td>Southern</td>
-            <td>WML, APC, NESM</td>
-            <td>The first 5 days of employment of any employee shall be a probationary period during which time any termination will not be challenged.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-
-            <td>Cement Masons</td>
-            <td>San Diego</td>
-            <td>WML</td>
-            <td>Any employee may be terminated for refusing to submit to substance abuse screening, for drinking on the job, for drunkenness, for dishonesty or for any lawful reason, which affects the employee’s qualification to perform work on the jobsite. Any discharge may be subject to the grievance procedure.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Laborers</td>
-            <td>Northern</td>
-            <td>WML, APC, NESM, LUC</td>
-            <td>During the first 32 hours of employment, the Individual Employer may reject or discharge any employee for any reason. After 32 hours of employment, no employee shall be discharged without just cause.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-
-            <td>Laborers</td>
-            <td>Southern</td>
-            <td>WML, APC, LUC</td>
-            <td>Contractor retains the right to reject, for any reason, any job applicant referred by the employment facility. The Contractor may discharge any employee for any cause which he may deem sufficient, provided there shall be no discrimination on the part of the Contractor against any applicant or employee, nor shall any such employee be discharged by reason of any Union activity not interfering with the proper performance of his work.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Laborers</td>
-            <td>San Diego</td>
-            <td>WML</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Operating Engineers</td>
-            <td>Northern</td>
-            <td>WML, APC, NESM, LUC</td>
-            <td>No Employee shall be discharged without "just cause". In the event of discharge without "just cause", the Employee may be reinstated with payment of wages and fringe benefits for time lost. Employees discharged for "just cause" shall be paid only for actual time worked.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Operating Engineers</td>
-            <td>Southern</td>
-            <td>WML, APC, LUC</td>
-            <td>No employee shall be discharged or discriminated against. Any separation of employment for any reason, including discharge, may be subject to the Grievance procedure. When workmen are laid off or discharged, they must be paid wages due them at the time of layoff or discharge. In the event the Employer fails to pay employees laid off or discharged, they shall be paid waiting time at the straight-time rate of 8 hours per day, 5 days per week, until the time such payment has been made</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Operating Engineers</td>
-            <td>San Diego</td>
-            <td>WML</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Operating Engineers</td>
-            <td>Northern-Private</td>
-            <td>LUC</td>
-            <td>"The Employer shall be the sole judge of the qualifications of all of his, her or its Employees, and may on such grounds discharge any of them for just cause.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-
-          </tr>
-          <tr>
-            <td>Pipe Trades</td>
-            <td>Southern 16</td>
-            <td>NESM</td>
-            <td>Except as they are limited by the terms of this Agreement, the prerogatives of management include, but are not limited to, the exclusive right to hire, promote, demote, transfer, discharge, increase or decrease the work force to meet the exigencies of the business, and to maintain the efficiency of the operation. Any of the rights, powers or authority the Employer had prior to the signing of this Agreement are retained by the Employer except those specifically abridged, delegated or modified by this Agreement</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Pipe Trades</td>
-            <td>Northern 36</td>
-            <td>NESM</td>
-            <td>Employees may be laid off or discharged at any time for just cause. Except in cases of discharge for just cause, no A-List employee shall be laid off or discharged until all D-List, C-List and B-List employees in the same work classification have been laid off or discharged in that order, e.g. “D”, then “C”, then “B” on a job by job basis. Among other just causes, it shall be deemed just cause for an Individual Employer to discharge an employee when the Individual Employer's insurance carrier has notified him in writing or by telegram that said employee may not drive any employer-owned vehicle due to the employee’s poor DMV driving record when the driving of the employer-owned vehicle is an essential requirement to the performance of the employee’s regular job functions and copies of the writing or telegram from the insurance carrier and of the DMV record relied upon have first been made available to the Local Union's Business Manager.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Plumbers/PipeFitters</td>
-            <td>CA Short (250, 246, 460, 342)</td>
-            <td>LUC</td>
-            <td>The individual Employer may discharge any employee for just cause.</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>So. Fitters CA/Shortline</td>
-            <td>Southern 460</td>
-            <td>NESM, LUC</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-          </tr>
         </tbody>
-      </table>
-    </div>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.0/bootstrap-table.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/editable/bootstrap-table-editable.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/export/bootstrap-table-export.js'></script>
-    <script src='https://rawgit.com/hhurz/tableExport.jquery.plugin/master/tableExport.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.js'></script>
-  </body>
+      
+    </table>
 
+    <script>
+    $(document).ready(function() {
+    // Setup - add a text input to each footer cell
+    $('#example thead tr').clone(true).appendTo( '#example thead' );
+    $('#example thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="" />' );
+ 
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+ 
+    var table = $('#example').DataTable( {
+        orderCellsTop: true,
+        fixedHeader: true,
+        bPaginate: false,
+        bInfo: false,
+        bSort: false, 
+        bDeferRender: true
+        
+    } );
+} );
+</script>
+</body>
 </html>
